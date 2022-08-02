@@ -1,0 +1,32 @@
+<div class="add">
+
+  <mat-form-field>
+    <mat-label>Nazwa taska</mat-label>
+    <input matInput value="test" #input>
+  </mat-form-field>
+
+  <button mat-button (click)="addTodo()">Add</button>
+</div>
+
+
+<div class="lists">
+  <div class="item">
+    <h2>Do zrobienia</h2>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let item of todoService.getTodos() | isDone:false">
+        <app-todo-item [todoItem]="item" (remove)="onRemove(item)" (checked)="onCheck(item)"></app-todo-item>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div class="item">
+    <h2>Zrobione</h2>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let item of todoService.getTodos() | isDone:true">
+        <app-todo-item [todoItem]="item" (remove)="onRemove(item)" (checked)="onCheck(item)"></app-todo-item>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+
+</div>
