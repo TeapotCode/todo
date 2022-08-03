@@ -16,10 +16,10 @@ export class TodoComponent {
 
   addTodo() {
     if (this.inputRef.nativeElement.value.length < 5) {
-      this.notification.notify('error', 'Nazwa taska nie może być krótsza niż 5 znaków')
+      this.notification.notify('error', 'Nazwa zadania nie może być krótsza niż 5 znaków')
       return
     }
-    this.notification.notify('success', 'Dodano taska: ' + this.inputRef.nativeElement.value)
+    this.notification.notify('success', 'Dodano zadanie: ' + this.inputRef.nativeElement.value)
 
 
     this.todoService.addTodo(this.inputRef.nativeElement.value)
@@ -28,13 +28,13 @@ export class TodoComponent {
   }
 
   onRemove(item: TodoItem) {
-    this.notification.notify('success', 'Usunięto taska: ' + item.name)
+    this.notification.notify('success', 'Usunięto zadanie: ' + item.name)
 
     this.todoService.removeItem(item);
   }
 
   onCheck(item: TodoItem) {
-    if (item.done) this.notification.notify('success', 'Wykonano taska: ' + item.name)
+    if (item.done) this.notification.notify('success', 'Wykonano zadanie: ' + item.name)
     this.todoService.check(item);
   }
 

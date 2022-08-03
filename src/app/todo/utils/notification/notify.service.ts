@@ -15,7 +15,7 @@ export class NotifyService implements OnDestroy {
     this.viewContainerRef = ref;
   }
 
-  notify(type: NotificationType, message: string, duration: number = 5000) {
+  notify(type: NotificationType, message: string, duration: number = 4000) {
     if(!this.viewContainerRef) throw new Error('Notify is not in template!')
 
 
