@@ -31,8 +31,8 @@ export class TodoItemComponent {
     }
   }
 
-  @Output('checked') check = new EventEmitter<boolean>();
   @Output('remove') remove = new EventEmitter<void>();
+  @Output('checked') check = new EventEmitter<boolean>();
 
   constructor(private datePipe: DatePipe) {
   }
