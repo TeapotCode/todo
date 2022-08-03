@@ -9,10 +9,17 @@ export type NotificationType = 'success' | 'error';
 })
 export class NotificationComponent {
 
-  @Input() type: NotificationType = "success";
+  _type: NotificationType = 'success';
+
+  @Input()
+  set type(type: NotificationType) {
+    this._type = type
+    this.class = type
+  }
+
   @Input() message: string = "";
 
-  @HostBinding('class') class = this.type
+  @HostBinding('class') class = this._type
 
   constructor() { }
 
