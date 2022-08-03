@@ -41,7 +41,7 @@ export class TodoComponent implements OnDestroy {
   @ViewChild(NotificationRefDirective, {static: true}) notificationRef!: NotificationRefDirective;
 
   timeoutRef: ReturnType<typeof setTimeout> | undefined;
-  loadComponent(type: NotificationType, message: string, time: number = 5000) {
+  loadComponent(type: NotificationType, message: string, time: number = 500000) {
     const viewContainerRef = this.notificationRef.viewContainerRef
 
     const componentRef = viewContainerRef.createComponent(NotificationComponent)
