@@ -13,6 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { IsDonePipe } from './todo/utils/is-done.pipe';
 import { TooltipDirective } from './todo/utils/tooltip.directive';
 import { NotificationRefDirective } from './todo/utils/notification-ref.directive';
+import { NotificationComponent } from './todo/ui/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NotificationRefDirective } from './todo/utils/notification-ref.directiv
     IsDonePipe,
     TooltipDirective,
     NotificationRefDirective,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
