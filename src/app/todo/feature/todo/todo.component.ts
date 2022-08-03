@@ -49,8 +49,8 @@ export class TodoComponent {
     if (this.timeoutRef) clearTimeout(this.timeoutRef);
 
     const componentRef = viewContainerRef.createComponent(NotificationComponent)
-    componentRef.instance.type = type
-    componentRef.instance.message = message
+    componentRef.setInput('type', type)
+    componentRef.setInput('message', message)
 
     this.timeoutRef = setTimeout(() => {
       viewContainerRef.clear()
