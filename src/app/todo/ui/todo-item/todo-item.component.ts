@@ -1,11 +1,19 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
-import {TodoItem} from "../../utils/todoitem";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output
+} from '@angular/core';
+import {TodoItem} from "../../utils/todoItem";
 import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css'],
+  styleUrls: ['./todo-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DatePipe]
 })
@@ -25,8 +33,6 @@ export class TodoItemComponent {
 
   @Output('checked') check = new EventEmitter<boolean>();
   @Output('remove') remove = new EventEmitter<void>();
-
-
 
   constructor(private datePipe: DatePipe) {
   }

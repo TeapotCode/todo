@@ -1,11 +1,11 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {TodoListService} from "../../data-access/todo-list.service";
-import {TodoItem} from "../../utils/todoitem";
+import {TodoItem} from "../../utils/todoItem";
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent {
 
@@ -14,6 +14,7 @@ export class TodoComponent {
   @ViewChild('input') inputRef!: ElementRef<HTMLInputElement>;
 
   addTodo() {
+    if(this.inputRef.nativeElement.value.length < 1) return
     this.todoService.addTodo(this.inputRef.nativeElement.value)
     this.inputRef.nativeElement.value = ''
     this.inputRef.nativeElement.focus()

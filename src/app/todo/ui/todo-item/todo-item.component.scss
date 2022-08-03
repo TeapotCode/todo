@@ -7,6 +7,7 @@
   min-width: 50%;
   justify-content: space-between;
   cursor: pointer;
+  height: 100%;
 }
 
 :host:hover {
@@ -15,13 +16,14 @@
 
 label {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0.5rem;
   word-wrap: anywhere;
   margin-left: 5px;
   cursor: pointer;
   padding: 5px;
+  width: 100%;
+  text-align: left;
 }
 
 input[type="checkbox"] {
@@ -42,7 +44,7 @@ input[type="checkbox"]:checked {
   background-color: #b7ff4c;
 }
 
-input[type="checkbox"]:hover {
+:host:hover input[type="checkbox"] {
   background-color: #9cc7ff;
 }
 

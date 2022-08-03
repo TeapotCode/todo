@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {TodoItem} from "../utils/todoitem";
+import {TodoItem} from "../utils/todoItem";
 
 
 @Injectable({
@@ -7,16 +7,7 @@ import {TodoItem} from "../utils/todoitem";
 })
 export class TodoListService {
 
-  private todoList: TodoItem[] = [
-    {id: Symbol(), name: 'asdasd', done: true, doneCreated: new Date().getTime()},
-    {id: Symbol(), name: 'asdasdasdasdasksdgksdkjfsdasdasdf', done: false, doneCreated: null},
-    {
-      id: Symbol(),
-      name: 'asdasdasdasdasksdgksdkjfsdasdasdfasdasdasdasdasksdgksdkjfsdasdasdfasdasdasdasdasksdgksdkjfsdasdasdfasdasdasdasdasksdgksdkjfsdasdasdf',
-      done: false,
-      doneCreated: null
-    },
-  ]
+  private todoList: TodoItem[] = []
 
   addTodo(name: string): void {
     this.todoList.push({

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {TodoItem} from "./todoitem";
+import {TodoItem} from "./todoItem";
 
 @Pipe({
   name: 'isDone'
