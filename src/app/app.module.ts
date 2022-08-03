@@ -12,6 +12,7 @@ import { TodoItemComponent } from './todo/ui/todo-item/todo-item.component';
 import {MatIconModule} from "@angular/material/icon";
 import { IsDonePipe } from './todo/utils/is-done.pipe';
 import { TooltipDirective } from './todo/utils/tooltip.directive';
+import { NotificationRefDirective } from './todo/utils/notification-ref.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TooltipDirective } from './todo/utils/tooltip.directive';
     TodoItemComponent,
     IsDonePipe,
     TooltipDirective,
+    NotificationRefDirective,
   ],
   imports: [
     BrowserModule,
