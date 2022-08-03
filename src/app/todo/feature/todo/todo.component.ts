@@ -17,10 +17,10 @@ export class TodoComponent implements OnDestroy {
 
   addTodo() {
     if (this.inputRef.nativeElement.value.length < 5) {
-      this.loadComponent('error', 'Nazwa taska nie może być krótsza niż 5 znaków')
+      this.notify('error', 'Nazwa taska nie może być krótsza niż 5 znaków')
       return
     }
-    this.loadComponent('success', 'Dodano taska: ' + this.inputRef.nativeElement.value)
+    this.notify('success', 'Dodano taska: ' + this.inputRef.nativeElement.value)
 
     this.todoService.addTodo(this.inputRef.nativeElement.value)
     this.inputRef.nativeElement.value = ''
@@ -28,20 +28,20 @@ export class TodoComponent implements OnDestroy {
   }
 
   onRemove(item: TodoItem) {
-    this.loadComponent('success', 'Usunięto taska')
+    this.notify('success', 'Usunięto taska: ' + item.name)
 
     this.todoService.removeItem(item);
   }
 
   onCheck(item: TodoItem) {
-    if (item.done) this.loadComponent('success', 'Zaznaczono taska')
+    if (item.done) this.notify('success', 'Wykonano taska: ' + item.name)
     this.todoService.check(item);
   }
 
   @ViewChild(NotificationRefDirective, {static: true}) notificationRef!: NotificationRefDirective;
   timeoutRef: ReturnType<typeof setTimeout> | undefined;
 
-  loadComponent(type: NotificationType, message: string, duration: number = 5000) {
+  notify(type: NotificationType, message: string, duration: number = 5000) {
     const componentRef = this.notificationRef.viewContainerRef.createComponent(NotificationComponent)
     componentRef.setInput('type', type)
     componentRef.setInput('message', message)
@@ -53,6 +53,6 @@ export class TodoComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.notificationRef.viewContainerRef.clear()
-    if(this.timeoutRef) clearTimeout(this.timeoutRef);
+    this.timeoutRef && clearTimeout(this.timeoutRef);
   }
 }
