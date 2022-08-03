@@ -1,0 +1,10 @@
+.notifications {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  pointer-events: none;
+  align-items: flex-end;
+}

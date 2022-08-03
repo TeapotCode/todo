@@ -21,7 +21,7 @@ export class NotificationComponent {
 
   @HostBinding('class') class = this._type
 
-  constructor() {
-  }
+  constructor() {}
 
 }
+
