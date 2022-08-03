@@ -17,7 +17,6 @@ export class NotifyComponent implements AfterViewInit {
   @ViewChild('ref', {read: ViewContainerRef, static: true}) notificationRef!: ViewContainerRef;
 
   ngAfterViewInit(): void {
-    console.log(this.notificationRef)
     this.notify.setUpView(this.notificationRef)
   }
 }
