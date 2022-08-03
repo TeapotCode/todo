@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {TodoListService} from "../../data-access/todo-list.service";
 import {TodoItem} from "../../utils/todoItem";
 import {NotificationRefDirective} from "../../utils/notification-ref.directive";
@@ -9,8 +9,7 @@ import {NotificationComponent, NotificationType} from "../../ui/notification/not
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent {
-
+export class TodoComponent implements OnDestroy {
   constructor(public todoService: TodoListService) {
   }
 
@@ -40,20 +39,22 @@ export class TodoComponent {
   }
 
   @ViewChild(NotificationRefDirective, {static: true}) notificationRef!: NotificationRefDirective;
-  timeoutRef: ReturnType<typeof setTimeout> | undefined;
 
+  timeoutRef: ReturnType<typeof setTimeout> | undefined;
   loadComponent(type: NotificationType, message: string, time: number = 5000) {
     const viewContainerRef = this.notificationRef.viewContainerRef
-    viewContainerRef.clear()
-
-    if (this.timeoutRef) clearTimeout(this.timeoutRef);
 
     const componentRef = viewContainerRef.createComponent(NotificationComponent)
     componentRef.setInput('type', type)
     componentRef.setInput('message', message)
 
     this.timeoutRef = setTimeout(() => {
-      viewContainerRef.clear()
+      componentRef.destroy()
     }, time)
+  }
+
+  ngOnDestroy(): void {
+    this.notificationRef.viewContainerRef.clear()
+    if(this.timeoutRef) clearTimeout(this.timeoutRef);
   }
 }
