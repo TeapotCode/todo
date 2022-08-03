@@ -14,7 +14,7 @@ export class TodoListService {
       id: Symbol(name),
       name,
       done: false,
-      doneCreated: new Date().getTime()
+      doneCreated: null
     })
   }
 

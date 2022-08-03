@@ -16,7 +16,7 @@ export class TodoComponent implements OnDestroy {
   @ViewChild('input') inputRef!: ElementRef<HTMLInputElement>;
 
   addTodo() {
-    if (this.inputRef.nativeElement.value.length < 6) {
+    if (this.inputRef.nativeElement.value.length < 5) {
       this.loadComponent('error', 'Nazwa taska nie może być krótsza niż 5 znaków')
       return
     }
@@ -39,12 +39,10 @@ export class TodoComponent implements OnDestroy {
   }
 
   @ViewChild(NotificationRefDirective, {static: true}) notificationRef!: NotificationRefDirective;
-
   timeoutRef: ReturnType<typeof setTimeout> | undefined;
-  loadComponent(type: NotificationType, message: string, duration: number = 5000) {
-    const viewContainerRef = this.notificationRef.viewContainerRef
 
-    const componentRef = viewContainerRef.createComponent(NotificationComponent)
+  loadComponent(type: NotificationType, message: string, duration: number = 5000) {
+    const componentRef = this.notificationRef.viewContainerRef.createComponent(NotificationComponent)
     componentRef.setInput('type', type)
     componentRef.setInput('message', message)
 
