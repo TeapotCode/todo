@@ -1,20 +1,13 @@
-import {AfterViewInit, Component, ElementRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {NotifyService} from "./notify.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-notify',
   template: `
-      <ng-container #ref></ng-container>
+    <ng-container #ref></ng-container>
   `,
-  styleUrls: ['./notify.component.scss']
+  styleUrls: ['./notify.component.scss'],
 })
-export class NotifyComponent implements AfterViewInit {
-
-  constructor(private notify: NotifyService) { }
-
-  @ViewChild('ref', {read: ViewContainerRef, static: true}) notificationRef!: ViewContainerRef;
-
-  ngAfterViewInit(): void {
-    this.notify.setUpView(this.notificationRef)
+export class NotifyComponent {
+  constructor() {
   }
 }
