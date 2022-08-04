@@ -2,6 +2,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+:root {
+  --light-gray: #e8e6e2;
+  --gray-hover: #cac8c5;
+}
+
 body {
   box-sizing: border-box;
 }
@@ -21,3 +26,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     transform: translate(-50%, 0);
   }
 }
+

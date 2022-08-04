@@ -1,7 +1,7 @@
-<label [tooltip]="description">
-  <input type="checkbox" [checked]="item.done">
+<label [tooltip]="description" >
+  <input type="checkbox" [checked]="item.done" (click)="onCheck()">
   {{item.name}}
 </label>
-<button  mat-button aria-label="Delete button with delete icon" (click)="remove.emit()">
+<button #buttonref mat-button aria-label="Delete button with delete icon" (click)="onRemove()">
   <mat-icon aria-hidden="true" fontIcon="delete"></mat-icon>
 </button>

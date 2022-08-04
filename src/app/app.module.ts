@@ -12,7 +12,10 @@ import { TodoItemComponent } from './todo/ui/todo-item/todo-item.component';
 import {MatIconModule} from "@angular/material/icon";
 import { IsDonePipe } from './todo/utils/is-done.pipe';
 import { TooltipDirective } from './todo/utils/tooltip.directive';
-import {NotificationModule} from "./todo/utils/notification/notification.module";
+import {NotificationModule} from "./todo/feature/notification/notification.module";
+import { TodoItemPopupComponent } from './todo/feature/modal/todo-item-popup.component';
+import {OverlayModule} from "@angular/cdk/overlay";
+import {PortalModule} from "@angular/cdk/portal";
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import {NotificationModule} from "./todo/utils/notification/notification.module"
     TodoItemComponent,
     IsDonePipe,
     TooltipDirective,
+    TodoItemPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import {NotificationModule} from "./todo/utils/notification/notification.module"
     MatButtonModule,
     MatListModule,
     MatIconModule,
-    NotificationModule
+    NotificationModule,
+    OverlayModule,
+    PortalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,20 @@
+:host {
+  background-color: var(--light-gray);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+h2 {
+  padding: 0;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+button {
+  border-radius: 10px;
+  background-color: var(--gray-hover);
+}
+
+button:not(:last-of-type) {
+  margin-right: 10px;
+}

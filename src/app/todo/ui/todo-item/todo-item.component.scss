@@ -1,7 +1,7 @@
 :host {
   display: flex;
   align-items: stretch;
-  background-color: #e8e6e2;
+  background-color: var(--light-gray);
   border-radius: 10px;
   margin-left: 20px;
   justify-content: space-between;
@@ -10,7 +10,7 @@
 }
 
 :host:hover {
-  background-color: #cac8c5;
+  background-color: var(--gray-hover);
 }
 
 label {
@@ -18,8 +18,8 @@ label {
   align-items: center;
   gap: 0.5rem;
   word-wrap: anywhere;
-  margin-left: 5px;
   cursor: pointer;
+  margin-left: 5px;
   padding: 5px;
   width: 100%;
   text-align: left;

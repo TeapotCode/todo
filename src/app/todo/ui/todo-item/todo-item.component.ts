@@ -1,14 +1,16 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Input,
-  Output
+  Output, ViewChild
 } from '@angular/core';
 import {TodoItem} from "../../utils/todoItem";
 import {DatePipe} from "@angular/common";
+import {ModalService} from "../../feature/modal/modal.service";
+import {Element} from "@angular/compiler";
 
 @Component({
   selector: 'app-todo-item',
@@ -34,12 +36,19 @@ export class TodoItemComponent {
   @Output('remove') remove = new EventEmitter<void>();
   @Output('checked') check = new EventEmitter<boolean>();
 
-  constructor(private datePipe: DatePipe) {
+  constructor(private datePipe: DatePipe, private el: ElementRef, private modal: ModalService) {
   }
 
-  @HostListener('click')
+  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<HTMLButtonElement>;
+
   onCheck() {
     this.item.done = !this.item.done
     this.check.emit(this.item.done)
+  }
+
+  onRemove() {
+    this.modal.open(this.buttonRemoveRef, () => {
+      this.remove.emit()
+    })
   }
 }

@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {TodoListService} from "../../data-access/todo-list.service";
 import {TodoItem} from "../../utils/todoItem";
-import {NotifyService} from "../../utils/notification/notify.service";
+import {NotifyService} from "../notification/notify.service";
 
 @Component({
   selector: 'app-todo',
