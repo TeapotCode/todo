@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NotificationComponent} from "./notification/notification.component";
-import { NotifyComponent } from './notify.component';
+import {NotificationComponent} from "./ui/notification.component";
 import {PortalModule} from "@angular/cdk/portal";
-import {OverlayModule} from "@angular/cdk/overlay";
+import {NotifyWrapperComponent} from "./ui/notify-wrapper.component";
 
 
 
 @NgModule({
   declarations: [
     NotificationComponent,
-    NotifyComponent
-  ],
-  exports: [
-    NotificationComponent,
-    NotifyComponent
+    NotifyWrapperComponent
   ],
   imports: [
     CommonModule,
     PortalModule
+  ],
+  exports: [
+    NotificationComponent,
+    NotifyWrapperComponent
   ]
 })
 export class NotificationModule { }

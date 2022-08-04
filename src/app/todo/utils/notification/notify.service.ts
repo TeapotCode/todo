@@ -7,10 +7,10 @@ import {
   Injector,
   OnDestroy,
 } from '@angular/core';
-import {NotificationComponent, NotificationType} from "./notification/notification.component";
+import {NotificationComponent, NotificationType} from "./ui/notification.component";
 import {DOCUMENT} from "@angular/common";
-import {ComponentPortal, DomPortalOutlet} from "@angular/cdk/portal";
-import {NotifyComponent} from "./notify.component";
+import {ComponentPortal, ComponentType, DomPortalOutlet} from "@angular/cdk/portal";
+import {NotifyWrapperComponent} from "./ui/notify-wrapper.component";
 
 
 @Injectable({
@@ -18,17 +18,20 @@ import {NotifyComponent} from "./notify.component";
 })
 export class NotifyService implements OnDestroy {
 
-  notifyComp: ComponentRef<NotifyComponent> | undefined;
+  private notifyComp: ComponentRef<NotifyWrapperComponent> | undefined;
 
   constructor(@Inject(DOCUMENT) private document: Document, private factory: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) {}
 
+  private createInPlace<T>(element: Element, component: ComponentType<T>) {
+    return new DomPortalOutlet(element, this.factory, this.appRef, this.injector).attach(new ComponentPortal(component));
+  }
+
   notify(type: NotificationType, message: string, duration: number = 4000) {
-    if (!this.notifyComp) {
-      const dom = new DomPortalOutlet(this.document.body, this.factory, this.appRef, this.injector)
-      this.notifyComp = dom.attach(new ComponentPortal(NotifyComponent))
-    }
-    const outlet = new DomPortalOutlet(this.notifyComp.location.nativeElement, this.factory, this.appRef, this.injector)
-    const comp = outlet.attach(new ComponentPortal(NotificationComponent))
+    if (!this.notifyComp)
+      this.notifyComp = this.createInPlace(this.document.body, NotifyWrapperComponent);
+
+    const comp = this.createInPlace(this.notifyComp.location.nativeElement, NotificationComponent);
+
     comp.setInput('type', type)
     comp.setInput('message', message)
 

@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-notify',
-  template: `
-    <ng-container #ref></ng-container>
-  `,
+  selector: 'app-notify-wrapper',
+  template: ``,
   styles: [`
     :host {
     position: fixed;
@@ -18,7 +16,7 @@ import {Component} from '@angular/core';
   }
   `]
 })
-export class NotifyComponent {
+export class NotifyWrapperComponent {
   constructor() {
   }
 }

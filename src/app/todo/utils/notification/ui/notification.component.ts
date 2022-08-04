@@ -3,7 +3,7 @@ import {Component, HostBinding, Input} from '@angular/core';
 export type NotificationType = 'success' | 'error';
 
 @Component({
-  selector: 'app-notification',
+  selector: 'app-ui',
   template: '{{message}}',
   styleUrls: ['./notification.component.scss']
 })
