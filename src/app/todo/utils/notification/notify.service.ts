@@ -1,9 +1,8 @@
 import {Injectable, OnDestroy, ViewContainerRef} from '@angular/core';
 import {NotificationComponent, NotificationType} from "./notification/notification.component";
-import {NotificationModule} from "./notification.module";
 
 @Injectable({
-  providedIn: NotificationModule
+  providedIn: 'root'
 })
 export class NotifyService implements OnDestroy {
 

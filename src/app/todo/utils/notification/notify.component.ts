@@ -4,9 +4,7 @@ import {NotifyService} from "./notify.service";
 @Component({
   selector: 'app-notify',
   template: `
-    <div class="notifications">
       <ng-container #ref></ng-container>
-    </div>
   `,
   styleUrls: ['./notify.component.scss']
 })
