@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Inject, Injectable} from '@angular/core';
 import {ComponentPortal, ComponentType} from "@angular/cdk/portal";
-import {EMPTY, Observable, take} from "rxjs";
+import {combineLatestAll, EMPTY, Observable, Subject, take, takeUntil} from "rxjs";
 import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
 import {DOCUMENT} from "@angular/common";
 
@@ -16,7 +16,8 @@ type GetInsideObservable<X> = X extends Observable<infer I> ? I : undefined;
 export class DialogService {
 
 
-  constructor(private overlay: Overlay, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
+  }
 
   private overlayConfig(element: ElementRef): OverlayConfig {
     return {
@@ -32,25 +33,31 @@ export class DialogService {
         new ConnectionPositionPair(
           {originX: 'start', originY: "bottom"},
           {overlayX: 'start', overlayY: 'top'},
-          0,20
+          0, 20
         )
       ])
     }
   }
 
   open<T extends DialogComponent<GetInsideObservable<T["output"]>>>(element: ElementRef, component: ComponentType<T>, callback: (value: GetInsideObservable<T["output"]>) => void) {
-      let overlayRef = this.overlay.create(this.overlayConfig(element))
-      let componentRef = overlayRef.attach(new ComponentPortal(component));
+    let overlayRef = this.overlay.create(this.overlayConfig(element))
+    let componentRef = overlayRef.attach(new ComponentPortal(component));
 
-      overlayRef.backdropClick().pipe(take(1))
-        .subscribe(() => {
+    let unsubscribe = new Subject();
+
+    overlayRef.backdropClick().pipe(takeUntil(unsubscribe))
+      .subscribe(() => {
         componentRef.destroy()
+        unsubscribe.next("")
       })
 
-      componentRef.instance.output.pipe(take(1))
-        .subscribe((value) => {
+    componentRef.instance.output.pipe(takeUntil(unsubscribe))
+      .subscribe((value) => {
         callback(value)
         componentRef.destroy()
+        unsubscribe.next("")
       });
+
+
   }
 }
