@@ -13,7 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { IsDonePipe } from './todo/utils/is-done.pipe';
 import { TooltipDirective } from './todo/utils/tooltip.directive';
 import {NotificationModule} from "./todo/feature/notification/notification.module";
-import { TodoItemPopupComponent } from './todo/feature/modal/todo-item-popup.component';
+import { TodoItemPopupComponent } from './todo/ui/todo-item-popup/todo-item-popup.component';
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
 

@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
     top: 20px;
     right: 20px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-direction: column;
     pointer-events: none;
     align-items: flex-end;

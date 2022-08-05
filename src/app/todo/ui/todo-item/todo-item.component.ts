@@ -2,15 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component, ElementRef,
   EventEmitter,
-  HostBinding,
-  HostListener,
+  Inject,
   Input,
   Output, ViewChild
 } from '@angular/core';
 import {TodoItem} from "../../utils/todoItem";
-import {DatePipe} from "@angular/common";
-import {ModalService} from "../../feature/modal/modal.service";
-import {Element} from "@angular/compiler";
+import {DatePipe, DOCUMENT} from "@angular/common";
+import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
+import {ComponentPortal} from "@angular/cdk/portal";
+import {TodoItemPopupComponent} from "../todo-item-popup/todo-item-popup.component";
+import {filter, fromEvent, map, mapTo, merge, take, tap} from "rxjs";
 
 @Component({
   selector: 'app-todo-item',
@@ -36,19 +37,49 @@ export class TodoItemComponent {
   @Output('remove') remove = new EventEmitter<void>();
   @Output('checked') check = new EventEmitter<boolean>();
 
-  constructor(private datePipe: DatePipe, private el: ElementRef, private modal: ModalService) {
+  constructor(private datePipe: DatePipe, private el: ElementRef, private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
   }
 
-  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<HTMLButtonElement>;
+  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<any>;
 
   onCheck() {
     this.item.done = !this.item.done
     this.check.emit(this.item.done)
   }
 
+  get overlayConfig(): OverlayConfig {
+    return {
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      positionStrategy: this.overlay.position().flexibleConnectedTo(this.el).withPositions([
+        new ConnectionPositionPair(
+          {originX: 'end', originY: "top"},
+          {overlayX: 'start', overlayY: 'top'},
+          10
+        )
+      ])
+    }
+  }
+
+  isModalOpen: boolean = false;
+
   onRemove() {
-    this.modal.open(this.buttonRemoveRef, () => {
-      this.remove.emit()
-    })
+    if (!this.isModalOpen) {
+      let overlayRef = this.overlay.create(this.overlayConfig)
+      let component = overlayRef.attach(new ComponentPortal(TodoItemPopupComponent));
+
+      let onOutSideClick = fromEvent<MouseEvent>(this.document, "mousedown")
+        .pipe(
+          filter(({target}) =>
+            target instanceof Element && !component.location.nativeElement.contains(target) && !this.buttonRemoveRef.nativeElement.contains(target)),
+          map(() => false));
+
+      let onDenyClick = component.instance.onClose.asObservable();
+
+      merge(onOutSideClick, onDenyClick).pipe(take(1)).subscribe(value => {
+        if (value) this.remove.emit()
+        component.destroy()
+        this.isModalOpen = false
+      })
+    }
   }
 }

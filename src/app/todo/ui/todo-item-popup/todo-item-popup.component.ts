@@ -1,5 +1,4 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-todo-item-popup',
@@ -8,8 +7,6 @@ import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overl
 })
 export class TodoItemPopupComponent {
 
-  @Input() message: string = "Usunąć?";
-  @Input() element!: ElementRef;
   @Output() onClose = new EventEmitter<boolean>();
 
   constructor() { }
