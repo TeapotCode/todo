@@ -17,6 +17,7 @@ import { TodoItemPopupComponent } from './todo/ui/todo-item-popup/todo-item-popu
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
 import { TodoListComponent } from './todo/ui/todo-list/todo-list.component';
+import { AddTaskInputComponent } from './todo/ui/add-task-input/add-task-input.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TodoListComponent } from './todo/ui/todo-list/todo-list.component';
     TooltipDirective,
     TodoItemPopupComponent,
     TodoListComponent,
+    AddTaskInputComponent,
   ],
   imports: [
     BrowserModule,

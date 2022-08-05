@@ -1,11 +1,3 @@
-<div class="add">
-
-  <mat-form-field>
-    <mat-label>Nazwa taska</mat-label>
-    <input matInput value="test" #input>
-  </mat-form-field>
-
-  <button mat-button (click)="addTodo()">Add</button>
-</div>
+<app-add-task-input (add)="addTodo($event.name, $event.date)"></app-add-task-input>
 
 <app-todo-list [list]="todoService.getTodos()" (remove)="onRemove($event)" (mark)="onCheck($event)"></app-todo-list>

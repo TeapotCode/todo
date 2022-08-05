@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {TodoListService} from "../../data-access/todo-list.service";
 import {TodoItem} from "../../utils/todoItem";
 import {NotifyService} from "../../utils/notification/notify.service";
@@ -12,18 +12,13 @@ export class TodoComponent {
   constructor(public todoService: TodoListService, private notification: NotifyService) {
   }
 
-  @ViewChild('input') inputRef!: ElementRef<HTMLInputElement>;
-
-  addTodo() {
-    if (this.inputRef.nativeElement.value.length < 5) {
+  addTodo(name: string, date?: number) {
+    if (name.length < 5) {
       this.notification.notify('error', 'Nazwa zadania nie może być krótsza niż 5 znaków')
       return
     }
-    this.notification.notify('success', 'Dodano zadanie: ' + this.inputRef.nativeElement.value)
-
-    this.todoService.addTodo(this.inputRef.nativeElement.value)
-    this.inputRef.nativeElement.value = ''
-    this.inputRef.nativeElement.focus()
+    this.notification.notify('success', 'Dodano zadanie: ' + name)
+    this.todoService.addTodo(name, date)
   }
 
   onRemove(item: TodoItem) {
