@@ -15,10 +15,10 @@ export class TodoComponent {
   addTodo(name: string, date?: number) {
     if (name.length < 5) {
       this.notification.notify('error', 'Nazwa zadania nie może być krótsza niż 5 znaków')
-      return
+    } else {
+      this.notification.notify('success', 'Dodano zadanie: ' + name)
+      this.todoService.addTodo(name, date)
     }
-    this.notification.notify('success', 'Dodano zadanie: ' + name)
-    this.todoService.addTodo(name, date)
   }
 
   onRemove(item: TodoItem) {

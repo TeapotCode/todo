@@ -19,6 +19,7 @@ export class TodoListService {
     })
   }
 
+
   getTodos(): TodoItem[] {
     return [...this.todoList].reverse()
   }

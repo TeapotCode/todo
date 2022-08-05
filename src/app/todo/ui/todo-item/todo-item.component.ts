@@ -24,12 +24,16 @@ export class TodoItemComponent {
 
   item!: TodoItem;
   description: string = 'Task nie zrobiony';
+  date: number | undefined;
 
   @Input('todoItem')
   set _item(item: TodoItem) {
     this.item = item;
     if (item.doneCreated) {
       this.description = `Zrobione dnia ${this.datePipe.transform(item.doneCreated, 'mediumDate')}`
+    }
+    if(item.dateDeadline) {
+      this.date = item.dateDeadline
     }
   }
 

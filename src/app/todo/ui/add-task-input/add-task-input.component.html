@@ -5,5 +5,11 @@
     <input matInput value="test" #input>
   </mat-form-field>
 
-  <button mat-button (click)="onAdd()">Add</button>
+  <button mat-button (click)="onAddClick()">Add</button>
 </div>
+
+
+<mat-card class="demo-inline-calendar-card" *cdkPortal>
+  <mat-label>Wybierz deadline</mat-label>
+  <mat-calendar (selectedChange)="onDateSelect($event)"></mat-calendar>
+</mat-card>
