@@ -21,6 +21,7 @@ import {AddTaskInputComponent} from './todo/ui/add-task-input/add-task-input.com
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatCardModule} from "@angular/material/card";
 import {MatNativeDateModule} from "@angular/material/core";
+import { DatePickerComponent } from './todo/ui/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     TodoItemPopupComponent,
     TodoListComponent,
     AddTaskInputComponent,
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@ import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overl
 import {ComponentPortal} from "@angular/cdk/portal";
 import {TodoItemPopupComponent} from "../todo-item-popup/todo-item-popup.component";
 import {filter, fromEvent, map, merge, take} from "rxjs";
+import {DialogService} from "../../utils/date-dialog/dialog.service";
+import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({
   selector: 'app-todo-item',
@@ -24,7 +26,7 @@ export class TodoItemComponent {
 
   item!: TodoItem;
   description: string = 'Task nie zrobiony';
-  date: number | undefined;
+
 
   @Input('todoItem')
   set _item(item: TodoItem) {
@@ -32,15 +34,13 @@ export class TodoItemComponent {
     if (item.doneCreated) {
       this.description = `Zrobione dnia ${this.datePipe.transform(item.doneCreated, 'mediumDate')}`
     }
-    if(item.dateDeadline) {
-      this.date = item.dateDeadline
-    }
   }
 
   @Output('remove') remove = new EventEmitter<void>();
   @Output('checked') check = new EventEmitter<boolean>();
+  @Output('setDate') setDate = new EventEmitter<Date>();
 
-  constructor(private datePipe: DatePipe, private el: ElementRef, private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
+  constructor(private datePipe: DatePipe, private el: ElementRef, private overlay: Overlay, @Inject(DOCUMENT) private document: Document, private dialog: DialogService) {
   }
 
   onCheck() {
@@ -48,41 +48,19 @@ export class TodoItemComponent {
     this.check.emit(this.item.done)
   }
 
-  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<HTMLButtonElement>;
-
-  get overlayConfig(): OverlayConfig {
-    return {
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      positionStrategy: this.overlay.position().flexibleConnectedTo(this.el).withPositions([
-        new ConnectionPositionPair(
-          {originX: 'end', originY: "top"},
-          {overlayX: 'start', overlayY: 'top'},
-          10
-        )
-      ])
-    }
-  }
-
-  isModalOpen: boolean = false;
+  @ViewChild('buttonRef', {read: ElementRef}) buttonRemoveRef!: ElementRef<HTMLButtonElement>;
 
   onRemove() {
-    if (!this.isModalOpen) {
-      let overlayRef = this.overlay.create(this.overlayConfig)
-      let component = overlayRef.attach(new ComponentPortal(TodoItemPopupComponent));
+    this.dialog.open(this.buttonRemoveRef, TodoItemPopupComponent, (value) => {
+      if (value) this.remove.emit()
+    })
+  }
 
-      let onOutSideClick = fromEvent<MouseEvent>(this.document, "mousedown")
-        .pipe(
-          filter(({target}) =>
-            target instanceof Element && !component.location.nativeElement.contains(target) && !this.buttonRemoveRef.nativeElement.contains(target)),
-          map(() => false));
+  @ViewChild('dateRef', {static: true}) dateRef!: ElementRef<HTMLParagraphElement>;
 
-      let onDenyClick = component.instance.onClose.asObservable();
-
-      merge(onOutSideClick, onDenyClick).pipe(take(1)).subscribe(value => {
-        if (value) this.remove.emit()
-        component.destroy()
-        this.isModalOpen = false
-      })
-    }
+  onDateClick() {
+    this.dialog.open(this.dateRef, DatePickerComponent, (selected) => {
+      this.setDate.emit(selected);
+    })
   }
 }

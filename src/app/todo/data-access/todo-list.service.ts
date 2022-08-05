@@ -24,6 +24,17 @@ export class TodoListService {
     return [...this.todoList].reverse()
   }
 
+  setDate(item: TodoItem) {
+    this.todoList = this.todoList.map(value => {
+      if (value.id === item.id)
+        return {
+          ...item,
+          dateDeadline: item.dateDeadline
+        }
+      return value
+    })
+  }
+
   removeItem(item: TodoItem) {
     this.todoList = this.todoList.filter(x => x.id !== item.id);
   }

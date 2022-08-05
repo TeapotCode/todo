@@ -11,8 +11,10 @@ export class TodoListComponent implements OnInit {
   @Input() list: TodoItem[] = [];
   @Output() remove = new EventEmitter<TodoItem>();
   @Output() mark = new EventEmitter<TodoItem>();
+  @Output('setDate') setDate = new EventEmitter<TodoItem>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -23,5 +25,10 @@ export class TodoListComponent implements OnInit {
 
   onCheck(item: TodoItem) {
     this.mark.emit(item)
+  }
+
+  onSetDate(item: TodoItem, selected: Date) {
+    item.dateDeadline = selected.getTime()
+    this.setDate.emit(item)
   }
 }

@@ -31,4 +31,7 @@ export class TodoComponent {
     this.todoService.check(item);
   }
 
+  onSetDate(item: TodoItem) {
+    this.todoService.setDate(item);
+  }
 }

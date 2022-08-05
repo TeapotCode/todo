@@ -1,11 +1,11 @@
 <div class="wrapper">
-<label [tooltip]="description" >
+<label [tooltip]="description">
   <input type="checkbox" [checked]="item.done" (click)="onCheck()">
   {{item.name}}
 </label>
-<button #buttonref mat-button aria-label="Delete button with delete icon" (click)="onRemove()">
+<button #buttonRef mat-button aria-label="Delete button with delete icon" (click)="onRemove()">
   <mat-icon aria-hidden="true" fontIcon="delete"></mat-icon>
 </button>
 </div>
 
-<p>{{date | date:'fullDate'}}</p>
+<p (click)="onDateClick()" #dateRef>{{item.dateDeadline | date:'fullDate'}}</p>

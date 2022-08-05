@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {CdkPortal, TemplatePortal} from "@angular/cdk/portal";
+import {DialogService} from "../../utils/date-dialog/dialog.service";
+import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({
   selector: 'app-add-task-input',
@@ -22,46 +24,22 @@ export class AddTaskInputComponent {
 
   selectedDate: number | undefined;
 
-  constructor(private overlay: Overlay) {
+  constructor(private dialog: DialogService) {
   }
+
+  @ViewChild('buttonRef', {read: ElementRef}) buttonRef!: ElementRef<HTMLButtonElement>;
 
   onAddClick() {
-    this.renderDate()
-  }
-
-  @ViewChild(CdkPortal) dateTemplateRef!: CdkPortal;
-  overlayRef: OverlayRef | undefined;
-
-  renderDate() {
-    if (!this.overlayRef) {
-      this.overlayRef = this.overlay.create({
-        hasBackdrop: true,
-        positionStrategy: this.overlay.position().flexibleConnectedTo(this.inputRef).withPositions([
-          new ConnectionPositionPair(
-            {originX: 'start', originY: "bottom"},
-            {overlayX: 'start', overlayY: "top"},
-            0,20
-          )])
-      })
-      this.overlayRef.attach(this.dateTemplateRef);
-
-      this.overlayRef.backdropClick().subscribe(value => {
-        this.overlayRef?.dispose()
-        this.overlayRef = undefined;
-        this.inputRef.nativeElement.focus()
-      })
-    }
+    this.dialog.open(this.buttonRef, DatePickerComponent, (selected: Date) => {
+      this.onDateSelect(selected)
+    })
   }
 
   onDateSelect(selected: Date) {
     this.selectedDate = selected.getTime();
-
     this.add.emit({name: this.inputRef.nativeElement.value, date: this.selectedDate})
     this.inputRef.nativeElement.value = ''
     this.inputRef.nativeElement.focus()
-
-    this.overlayRef?.dispose()
-    this.overlayRef = undefined;
   }
 
 }

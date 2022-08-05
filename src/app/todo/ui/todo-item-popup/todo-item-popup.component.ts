@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {DialogComponent} from "../../utils/date-dialog/dialog.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-todo-item-popup',
   templateUrl: './todo-item-popup.component.html',
   styleUrls: ['./todo-item-popup.component.scss']
 })
-export class TodoItemPopupComponent {
+export class TodoItemPopupComponent implements DialogComponent<boolean>{
 
   @Output() onClose = new EventEmitter<boolean>();
 
@@ -20,4 +22,6 @@ export class TodoItemPopupComponent {
     this.onClose.emit(false)
     this.onClose.complete()
   }
+
+  output: Observable<boolean> = this.onClose.asObservable();
 }
