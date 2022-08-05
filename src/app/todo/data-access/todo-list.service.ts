@@ -9,12 +9,13 @@ export class TodoListService {
 
   private todoList: TodoItem[] = []
 
-  addTodo(name: string): void {
+  addTodo(name: string, dateDeadline?: number): void {
     this.todoList.push({
       id: Symbol(name),
       name,
       done: false,
-      doneCreated: null
+      doneCreated: null,
+      dateDeadline: dateDeadline
     })
   }
 

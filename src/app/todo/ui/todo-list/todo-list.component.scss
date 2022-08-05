@@ -1,0 +1,27 @@
+mat-form-field {
+  height: 5rem;
+}
+
+mat-list mat-list-item {
+  height: 100%;
+  margin-bottom: 5px;
+}
+
+:host {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 80%;
+  /*gap: 2rem;*/
+}
+
+.item h2 {
+  display: flex;
+  justify-content: center;
+}
+
+
+.add {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}

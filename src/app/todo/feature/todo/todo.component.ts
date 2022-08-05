@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {TodoListService} from "../../data-access/todo-list.service";
 import {TodoItem} from "../../utils/todoItem";
-import {NotifyService} from "../notification/notify.service";
+import {NotifyService} from "../../utils/notification/notify.service";
 
 @Component({
   selector: 'app-todo',
@@ -21,7 +21,6 @@ export class TodoComponent {
     }
     this.notification.notify('success', 'Dodano zadanie: ' + this.inputRef.nativeElement.value)
 
-
     this.todoService.addTodo(this.inputRef.nativeElement.value)
     this.inputRef.nativeElement.value = ''
     this.inputRef.nativeElement.focus()
@@ -29,7 +28,6 @@ export class TodoComponent {
 
   onRemove(item: TodoItem) {
     this.notification.notify('success', 'Usunięto zadanie: ' + item.name)
-
     this.todoService.removeItem(item);
   }
 

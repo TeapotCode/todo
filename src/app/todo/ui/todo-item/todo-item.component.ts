@@ -11,7 +11,7 @@ import {DatePipe, DOCUMENT} from "@angular/common";
 import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
 import {ComponentPortal} from "@angular/cdk/portal";
 import {TodoItemPopupComponent} from "../todo-item-popup/todo-item-popup.component";
-import {filter, fromEvent, map, mapTo, merge, take, tap} from "rxjs";
+import {filter, fromEvent, map, merge, take} from "rxjs";
 
 @Component({
   selector: 'app-todo-item',
@@ -21,7 +21,6 @@ import {filter, fromEvent, map, mapTo, merge, take, tap} from "rxjs";
   providers: [DatePipe]
 })
 export class TodoItemComponent {
-
 
   item!: TodoItem;
   description: string = 'Task nie zrobiony';
@@ -40,12 +39,12 @@ export class TodoItemComponent {
   constructor(private datePipe: DatePipe, private el: ElementRef, private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
   }
 
-  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<any>;
-
   onCheck() {
     this.item.done = !this.item.done
     this.check.emit(this.item.done)
   }
+
+  @ViewChild('buttonref', {read: ElementRef}) buttonRemoveRef!: ElementRef<HTMLButtonElement>;
 
   get overlayConfig(): OverlayConfig {
     return {

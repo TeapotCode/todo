@@ -3,4 +3,5 @@ export interface TodoItem {
   name: string;
   done: boolean;
   doneCreated: number | null;
+  dateDeadline?: number;
 }
