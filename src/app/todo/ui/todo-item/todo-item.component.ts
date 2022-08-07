@@ -12,7 +12,7 @@ import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overl
 import {ComponentPortal} from "@angular/cdk/portal";
 import {TodoItemPopupComponent} from "../todo-item-popup/todo-item-popup.component";
 import {filter, fromEvent, map, merge, take} from "rxjs";
-import {DialogService} from "../../utils/date-dialog/dialog.service";
+import {DialogService} from "../../utils/dialog/dialog.service";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({

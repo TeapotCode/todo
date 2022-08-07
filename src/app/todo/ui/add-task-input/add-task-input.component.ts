@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {CdkPortal, TemplatePortal} from "@angular/cdk/portal";
-import {DialogService} from "../../utils/date-dialog/dialog.service";
+import {DialogService} from "../../utils/dialog/dialog.service";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DialogComponent} from "../../utils/date-dialog/dialog.service";
+import {DialogComponent} from "../../utils/dialog/dialog.service";
 import {Observable, Subject} from "rxjs";
 
 @Component({
