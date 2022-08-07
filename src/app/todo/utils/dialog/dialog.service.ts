@@ -39,7 +39,7 @@ export class DialogService {
     }
   }
 
-  open<T, U>(element: ElementRef, component: ComponentType<DialogComponent<U>>, callback: (value: U) => void) {
+  open<T>(element: ElementRef, component: ComponentType<DialogComponent<T>>, callback: (value: T) => void) {
     let overlayRef = this.overlay.create(this.overlayConfig(element))
     let componentRef = overlayRef.attach(new ComponentPortal(component));
 
