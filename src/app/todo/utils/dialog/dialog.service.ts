@@ -39,7 +39,7 @@ export class DialogService {
     }
   }
 
-  open<T extends DialogComponent<GetInsideObservable<T["output"]>>>(element: ElementRef, component: ComponentType<T>, callback: (value: GetInsideObservable<T["output"]>) => void) {
+  open<T, U>(element: ElementRef, component: ComponentType<DialogComponent<U>>, callback: (value: U) => void) {
     let overlayRef = this.overlay.create(this.overlayConfig(element))
     let componentRef = overlayRef.attach(new ComponentPortal(component));
 
