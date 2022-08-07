@@ -1,16 +1,5 @@
-import {
-  Component, ComponentRef,
-  ElementRef,
-  EmbeddedViewRef,
-  EventEmitter,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
-import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
-import {CdkPortal, TemplatePortal} from "@angular/cdk/portal";
-import {DialogService} from "../../utils/dialog/dialog.service";
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {DialogService} from "../../utils/dialog.service";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({

@@ -1,6 +1,6 @@
-import {Component, ElementRef, EventEmitter, Inject, Injectable} from '@angular/core';
+import {ElementRef, Inject, Injectable} from '@angular/core';
 import {ComponentPortal, ComponentType} from "@angular/cdk/portal";
-import {combineLatestAll, EMPTY, Observable, Subject, take, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
 import {DOCUMENT} from "@angular/common";
 
@@ -8,13 +8,10 @@ export interface DialogComponent<T> {
   output: Observable<T>
 }
 
-type GetInsideObservable<X> = X extends Observable<infer I> ? I : undefined;
-
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-
 
   constructor(private overlay: Overlay, @Inject(DOCUMENT) private document: Document) {
   }

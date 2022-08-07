@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   EventEmitter,
   Inject,
   Input,
-  Output, ViewChild
+  Output,
+  ViewChild
 } from '@angular/core';
 import {TodoItem} from "../../utils/todoItem";
 import {DatePipe, DOCUMENT} from "@angular/common";
-import {ConnectionPositionPair, Overlay, OverlayConfig} from "@angular/cdk/overlay";
-import {ComponentPortal} from "@angular/cdk/portal";
+import {Overlay} from "@angular/cdk/overlay";
 import {TodoItemPopupComponent} from "../todo-item-popup/todo-item-popup.component";
-import {filter, fromEvent, map, merge, take} from "rxjs";
-import {DialogService} from "../../utils/dialog/dialog.service";
+import {DialogService} from "../../utils/dialog.service";
 import {DatePickerComponent} from "../date-picker/date-picker.component";
 
 @Component({

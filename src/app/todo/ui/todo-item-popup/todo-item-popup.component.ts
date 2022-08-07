@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {DialogComponent} from "../../utils/dialog/dialog.service";
+import {DialogComponent} from "../../utils/dialog.service";
 import {Observable} from "rxjs";
 
 @Component({
